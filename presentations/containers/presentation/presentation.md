@@ -180,40 +180,12 @@ layout: false
 
   - Allow regenerating computing environments
   - Allow sharing your computing environments
-
----
-### <span style="color:purple">Virtual Machines vs Containers</span>
-
-<img src="img/Containers-vs-Virtual-Machines.jpg" width="80%" />
+&nbsp;
 
 --
 
- **Virtual Machines**
-  - **emulate whole computer system (software+hardware)**
-  - use *hypervisor* to share and manage hardware of the host, and execute the guest operating system
-  - guest machines are completely isolated and have dedicated resources
----
-### <span style="color:purple">Virtual Machines vs Containers</span>
-
-  <img src="img/Containers-vs-Virtual-Machines.jpg" width="80%" />
-
-
-
-   **Docker containers**
-  - **share the host system’s kernel with other containers**
-  - each container gets its own isolated user space
-  - only bins and libs are created from scratch
-  - **containers are very lightweight and fast to start up**
-
----
-### <span style="color:purple">How  do we choose the technology</span>
-
-There is no one solution that always works, your choice should depend on:
-- which hardware is available to you (also do you require GPU)
-- where is your data stored
-- Docker might me the most portable technology right now, but...
-  - if you use HPC centers you will have to use Singularity instead.
-
+**Containers are very lightweight and faster to start up 
+comparing to standard Virtual Machines**
 
 ---
 ###<span style="color:purple">Docker and Singularity </span>
@@ -232,5 +204,5 @@ There is no one solution that always works, your choice should depend on:
   - **supports existing and traditional HPC resources**
   - a user inside a Singularity container is the same user as outside the container
 (so you can be a root only if you were root on the host system)
-  - VM needed on macOS and Windows
+  - VM needed on Windows and OSX (some support for OSX, beta release)
   - a Singularity image can be created from a Docker image
