@@ -256,7 +256,7 @@ name: inverse
 layout: true
 class: center, middle, inverse
 ---
-## 2: Running *bet* within the container
+## 2: Using *my_fsl* container to run *bet*
 ---
 layout: false
 
@@ -283,33 +283,9 @@ docker run --rm my_fsl bet
 ---
 layout: false
 
-- installing a datalad repository and downloading one T1w file
-
-```bash
-mkdir data
-cd data
-datalad install -r ///workshops/nih-2017/ds000114
-datalad get ds000114/sub-01/ses-test/anat/sub-01_ses-test_T1w.nii.gz
-cd ..
-```
-
-- if you don't have datalad yet, you can download
-
-http://datasets.datalad.org/workshops/nih-2017/ds000114/sub-01/ses-test/anat/sub-01_ses-test_T1w.nii.gz
-
-```bash
-mkdir data
-cd data
-wget http://datasets.datalad.org/workshops/nih-2017/ds000114/sub-01/ses-test/anat/sub-01_ses-test_T1w.nii.gz
-cd ..
-```
-
----
-layout: false
-
 - mount a local directory with data (using read-only option) and running *bet* on the T1w file:
 ```bash
-docker run -v /your/path/to/data:/data:/data:ro my_fsl bet \
+docker run -v /home/ubuntu/containers_lesson/data:/data my_fsl bet \
 /data/sub-01_ses-test_T1w.nii.gz sub-01_output
 ```
 --
@@ -331,7 +307,7 @@ mkdir output
 
 - mounting two local directories, with data and output, and running *bet* on the T1w file:
 ```bash
-docker run -v /your/path/to/data:/data:ro -v ~/output:/output my_fsl bet \
+docker run -v /home/ubuntu/containers_lesson/data:/data:ro -v /home/ubuntu/containers_lesson/output:/output my_fsl bet \
 /data/sub-01_ses-test_T1w.nii.gz /output/sub-01_output
 ```
 --
@@ -343,7 +319,35 @@ ls -l output
 
 <img src="img/docker4.jpeg" width="90%" />
 
+---
+layout: false
 
+we can also run a script with the container
+
+- creating a new directory
+```bash
+mkdir scripts
+```
+
+- creating a script (use any editor you want)
+```bash
+emacs scripts/fsl_bash.sh &
+```
+
+- you can run your favourite FSL command
+```bash
+#!/bin/bash
+bet "$1" "$2" -m
+```
+
+- mounting three local directories, with data, with output and with the script, and running *bet* on the T1w file:
+```bash
+docker run -v /home/ubuntu/containers_lesson/data:/data:ro \
+-v /home/ubuntu/containers_lesson/output:/output \
+-v /home/ubuntu/containers_lesson/scripts:/scripts \
+my_fsl bash /scripts/fsl_bash.sh \
+/data/sub-01_ses-test_T1w.nii.gz /output/sub-01_output
+```
 
 ---
 layout: false
