@@ -215,7 +215,12 @@ class: center, middle, inverse
 ---
 ## Exercises
 ---
+layout: false
 
+name: inverse
+layout: true
+class: center, middle, inverse
+---
 ### 1. Use Docker command-line interface
 ---
 layout: false
@@ -235,7 +240,7 @@ layout: false
   $ docker pull hello-world
   ```
 --
-- #### List Docker images
+- #### List Docker images again
   ```bash
   $ docker images
   ```
@@ -245,25 +250,100 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 hello-world         latest              fce289e99eb9        9 days ago          1.84kB
 ```
 
+
+---
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+## 2: Running *bet* within the container
 ---
 layout: false
 
-- #### Run an image
-  ```bash
-  $ docker run hello-world
-  ```
+- running container
+```bash
+docker run --rm my_fsl
+```
 --
-- #### Run an image interactively
-  ```bash
-  $ docker run -it ubuntu:18.04 bash
-  ```
+
+<img src="img/docker1.jpeg" width="95%" />
+
+---
+layout: false
+
+- running command within the container
+```bash
+docker run --rm my_fsl bet
+```
 --
-- #### Run another image
-  ```bash
-  $ docker run kaczmarj/coco2019
-  ```
-???
-Let's say I made this cool new software I wanted to share with others. I can distribute it in a container, and everyone should be able to run it. I uploaded my Docker image to a repository online. My username is kaczmarj, and project is coco2019.
+
+<img src="img/docker2.jpeg" width="95%" />
+
+
+---
+layout: false
+
+- installing a datalad repository and downloading one T1w file
+
+```bash
+mkdir data
+cd data
+datalad install -r ///workshops/nih-2017/ds000114
+datalad get ds000114/sub-01/ses-test/anat/sub-01_ses-test_T1w.nii.gz
+cd ..
+```
+
+- if you don't have datalad yet, you can download
+
+http://datasets.datalad.org/workshops/nih-2017/ds000114/sub-01/ses-test/anat/sub-01_ses-test_T1w.nii.gz
+
+```bash
+mkdir data
+cd data
+wget http://datasets.datalad.org/workshops/nih-2017/ds000114/sub-01/ses-test/anat/sub-01_ses-test_T1w.nii.gz
+cd ..
+```
+
+---
+layout: false
+
+- mount a local directory with data (using read-only option) and running *bet* on the T1w file:
+```bash
+docker run -v /your/path/to/data:/data:/data:ro my_fsl bet \
+/data/sub-01_ses-test_T1w.nii.gz sub-01_output
+```
+--
+- checking the output
+```bash
+ls -l
+```
+--
+
+<img src="img/docker3.jpeg" width="95%" />
+
+---
+layout: false
+
+- creating a new directory for output
+```bash
+mkdir output
+```
+
+- mounting two local directories, with data and output, and running *bet* on the T1w file:
+```bash
+docker run -v /your/path/to/data:/data:ro -v ~/output:/output my_fsl bet \
+/data/sub-01_ses-test_T1w.nii.gz /output/sub-01_output
+```
+--
+- checking the output
+```bash
+ls -l output
+```
+--
+
+<img src="img/docker4.jpeg" width="90%" />
+
+
 
 ---
 layout: false
