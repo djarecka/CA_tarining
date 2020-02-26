@@ -206,3 +206,83 @@ comparing to standard Virtual Machines**
 (so you can be a root only if you were root on the host system)
   - VM needed on Windows and OSX (some support for OSX, beta release)
   - a Singularity image can be created from a Docker image
+
+---
+
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+## Exercises
+---
+
+### 1. Use Docker command-line interface
+---
+layout: false
+
+- #### Show Docker help
+  ```bash
+  $ docker --help
+  ```
+--
+- #### List Docker images
+  ```bash
+  $ docker images
+  ```
+--
+- #### Pull a Docker image
+  ```bash
+  $ docker pull hello-world
+  ```
+--
+- #### List Docker images
+  ```bash
+  $ docker images
+  ```
+
+```bash
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              fce289e99eb9        9 days ago          1.84kB
+```
+
+---
+layout: false
+
+- #### Run an image
+  ```bash
+  $ docker run hello-world
+  ```
+--
+- #### Run an image interactively
+  ```bash
+  $ docker run -it ubuntu:18.04 bash
+  ```
+--
+- #### Run another image
+  ```bash
+  $ docker run kaczmarj/coco2019
+  ```
+???
+Let's say I made this cool new software I wanted to share with others. I can distribute it in a container, and everyone should be able to run it. I uploaded my Docker image to a repository online. My username is kaczmarj, and project is coco2019.
+
+---
+layout: false
+
+### Cleaning up after yourself
+
+- #### Show all containers
+  ```bash
+  $ docker ps -a
+  ```
+--
+- #### Remove all stopped containers
+  ```bash
+  $ docker container prune
+  ```
+--
+- #### Automatically remove containers after stopping
+  ```bash
+  $ docker run --rm kaczmarj/coco2019
+  ```
+
+---
