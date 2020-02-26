@@ -352,7 +352,7 @@ my_fsl bash /scripts/fsl_bash.sh \
 ---
 layout: false
 
-running `bet` analysis using singularity
+### Running `bet` analysis using singularity
 
 ```bash
 $ singularity run /home/ubuntu/containers_lesson/images/my_fsl_sing.img bet \
@@ -505,6 +505,13 @@ sudo singularity build my_new_fsl_sing.img Singularity_fsl 
 ```
 
 ---
+layout: false
+
+### Using existing containers
+
+- check the [Docker Hub](https://hub.docker.com/)
+
+---
 
 
 ### Cleaning up after yourself
@@ -518,10 +525,3 @@ sudo singularity build my_new_fsl_sing.img Singularity_fsl 
   ```bash
   $ docker container prune
   ```
---
-- #### Automatically remove containers after stopping
-  ```bash
-  $ docker run --rm kaczmarj/coco2019
-  ```
-
----
