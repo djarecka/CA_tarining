@@ -352,7 +352,7 @@ my_fsl bash /scripts/fsl_bash.sh \
 ---
 layout: false
 
-- running `bet` analysis
+running `bet` analysis using singularity
 
 ```bash
 $ singularity run /home/ubuntu/containers_lesson/images/my_fsl_sing.img bet \
@@ -431,7 +431,7 @@ layout: false
 ---
 layout: false
 
-### [Neurodocker](https://github.com/kaczmarj/neurodocker)
+### [Neurodocker](https://github.com/repronim/neurodocker)
 
 &nbsp;
 - generates custom  Dockerfiles and Singularity files for neuroimaging software and minifies existing Docker images
@@ -449,7 +449,7 @@ layout: false
 - Creating a Dockerfile that includes FSL from Neurodebian:
 
   ```bash
-  docker run --rm kaczmarj/neurodocker:0.4.3 generate docker \
+  docker run --rm kaczmarj/neurodocker:0.6.0 generate docker \
   --base neurodebian:stretch-non-free \
   --pkg-manager apt \
   --install fsl-5.0-core fsl-mni152-templates \
@@ -468,7 +468,7 @@ cd my_docker
 
 - create a Dockerfile using Neurodocker:
 ```bash
-docker run --rm kaczmarj/neurodocker:master generate docker \
+docker run --rm kaczmarj/neurodocker:0.6.0 generate docker \
 --base neurodebian:stretch-non-free \
 --pkg-manager apt \
 --install fsl-5.0-core fsl-mni152-templates \
@@ -477,7 +477,7 @@ docker run --rm kaczmarj/neurodocker:master generate docker \
 
 - build a Docker image: 
 ```bash
-docker build -t my_fsl . 
+docker build -t my_new_fsl . 
 ```
 
 - check available Docker images: 
@@ -492,7 +492,7 @@ layout: false
 
 - creating a Singularity file using Neurodocker:
 ```bash
-docker run --rm kaczmarj/neurodocker:master generate singularity \
+docker run --rm kaczmarj/neurodocker:0.6.0 generate singularity \
 --base neurodebian:stretch-non-free \
 --pkg-manager apt \
 --install fsl-5.0-core fsl-mni152-templates \
@@ -501,48 +501,7 @@ docker run --rm kaczmarj/neurodocker:master generate singularity \
 
 - building a Singularity image: 
 ```bash
-sudo singularity build my_fsl.simg Singularity_fsl 
-```
-
----
-name: inverse
-layout: true
-class: center, middle, inverse
----
-### Exercise 1: Create a Docker image with FSL and conda environment with python 3.7 and numpy library
----
-layout: false
-
-- Use [the Neurodocker examples page](https://github.com/kaczmarj/neurodocker/tree/master/examples) for help
-(search for `miniconda` software) and update the previous command
-
-- Add the python part to the end of the Neurodocker command
-
---
-#### Solution
-
-- creating a Dockerfile_conda using Neurodocker:
-```bash
-docker run --rm kaczmarj/neurodocker:master generate docker \
---base neurodebian:stretch-non-free \
---pkg-manager apt \
---install fsl-5.0-core fsl-mni152-templates \
---add-to-entrypoint "source /etc/fsl/5.0/fsl.sh" \
---miniconda create_env=my_env \
-            conda_install='python=3.7 numpy' \
-            activate=true > Dockerfile_conda 
-```
-
-- building a Docker image (note, that we have to specify our name of Dockerfile if we don't use the default name, i.e. "Dockerfile"): 
-```bash
-docker build -t my_fsl_conda -f Dockerfile_conda . 
-```
-You could notice that creating FSL layers is fast, since Docker already have this layers available in `my_fsl` image.
-If you change the order of installing FSL and Python, Docker will have to start installing everything from the beginning.
-
-- checking available Docker images: 
-```bash
-docker images
+sudo singularity build my_new_fsl_sing.img Singularity_fsl 
 ```
 
 ---
