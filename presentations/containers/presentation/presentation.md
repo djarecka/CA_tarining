@@ -271,7 +271,8 @@ docker run --rm my_fsl
 ---
 layout: false
 
-- running command within the container
+- running *bet* command within the container
+(*bet* - Brain Extraction Tool)
 ```bash
 docker run --rm my_fsl bet
 ```
@@ -279,23 +280,6 @@ docker run --rm my_fsl bet
 
 <img src="img/docker2.jpeg" width="95%" />
 
-
----
-layout: false
-
-- mount a local directory with data (using read-only option) and running *bet* on the T1w file:
-```bash
-docker run -v /home/ubuntu/containers_lesson/data:/data my_fsl bet \
-/data/sub-01_ses-test_T1w.nii.gz sub-01_output
-```
---
-- checking the output
-```bash
-ls -l
-```
---
-
-<img src="img/docker3.jpeg" width="95%" />
 
 ---
 layout: false
