@@ -115,41 +115,6 @@ layout: false
 
 ---
 
-### <span style="color:purple">What does it mean to work in a container</span>
-
-
-If you are running a container on your laptop
-&nbsp;
-
-- it uses the same hardware
-
-- but user spaces and libraries are independent
-
---
-
-<img src="img/docker1in.jpeg" width="20%" />
-
-
-<img src="img/docker2in.jpeg" width="50%" />
-
----
-### <span style="color:purple">What does it mean to work in a container</span>
-
-
-If you are running a container on your laptop
-&nbsp;
-
-- it uses the same hardware
-
-- but user spaces and libraries are independent
-
-- you can create additional bindings between these two environments
-
-<img src="img/docker3in.jpeg" width="70%" />
-
-
----
-
 name: inverse
 layout: true
 class: center, middle, inverse
@@ -259,6 +224,41 @@ class: center, middle, inverse
 ## 2: Using *my_fsl* container to run *bet*
 ---
 layout: false
+
+### <span style="color:purple">What does it mean to work in a container</span>
+
+
+If you are running a container on your laptop
+&nbsp;
+
+- it uses the same hardware
+
+- but user spaces and libraries are independent
+
+--
+
+<img src="img/docker1in.jpeg" width="20%" />
+
+
+<img src="img/docker2in.jpeg" width="50%" />
+
+---
+### <span style="color:purple">What does it mean to work in a container</span>
+
+
+If you are running a container on your laptop
+&nbsp;
+
+- it uses the same hardware
+
+- but user spaces and libraries are independent
+
+- you can create additional bindings between these two environments
+
+<img src="img/docker3in.jpeg" width="70%" />
+
+---
+
 
 - running container
 ```bash
